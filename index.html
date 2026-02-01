@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="ar" dir="rtl" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الديناصورات عاشت في عُمان</title>
-  <script src="/_sdk/element_sdk.js"></script>
+  <title>الديناصورات عاشت في عُمان - مع المفردات التفاعلية</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -14,9 +13,6 @@
       --accent-color: #d4af37;
       --success-color: #22c55e;
       --danger-color: #ef4444;
-      --surface-light: #f8f9fa;
-      --surface-dark: #ffffff;
-      --text-dark: #1a1a1a;
     }
 
     * {
@@ -28,10 +24,8 @@
       padding: 0;
       font-family: 'Tajawal', 'Cairo', 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #f8f9fa 0%, #f0f4f8 100%);
-      transition: background-color 0.3s ease;
     }
 
-    /* Typography Enhancements */
     h1, h2, h3, h4, h5, h6 {
       font-weight: 700;
       letter-spacing: -0.5px;
@@ -77,14 +71,8 @@
     }
 
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .progress-bar {
@@ -101,21 +89,6 @@
       letter-spacing: 0.5px;
     }
 
-    .nav-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.3s ease;
-    }
-
-    .nav-button:hover:not(:disabled)::before {
-      left: 100%;
-    }
-
     .nav-button:hover:not(:disabled) {
       transform: translateX(-4px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
@@ -124,7 +97,79 @@
     .nav-button:disabled {
       opacity: 0.4;
       cursor: not-allowed;
-      transform: scale(0.95);
+    }
+
+    /* المفردات التفاعلية */
+    .vocab-word {
+      color: #8b5cf6 !important;
+      font-weight: 700;
+      border-bottom: 2px dotted #8b5cf6;
+      cursor: pointer;
+      padding: 2px 5px;
+      display: inline;
+      transition: all 0.3s ease;
+    }
+
+    .vocab-word:hover {
+      background-color: rgba(139, 92, 246, 0.2);
+      border-bottom-style: solid;
+      border-radius: 4px;
+    }
+
+    .vocab-tooltip {
+      position: fixed;
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 15px 50px rgba(139, 92, 246, 0.6);
+      max-width: 380px;
+      z-index: 10000;
+      animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.7) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .vocab-tooltip-close {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .vocab-tooltip-close:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .vocab-legend {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(124, 58, 237, 0.12));
+      border-right: 4px solid #8b5cf6;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .vocab-legend-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #6b21a8;
+      font-weight: 600;
+      font-size: 1.05em;
     }
 
     .answer-box {
@@ -132,70 +177,19 @@
     }
 
     @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-15px);
-        max-height: 0;
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        max-height: 1000px;
-      }
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Header Enhancement */
-    .lesson-header {
-      position: relative;
-      padding: 2.5rem 0;
-      background: linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, rgba(45, 90, 63, 0.08) 100%);
-      border-radius: 16px;
-      border-bottom: 3px solid #d4af37;
-    }
-
-    /* Progress indicator */
-    .progress-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    /* Vocabulary box */
-    .vocab-highlight {
-      background: linear-gradient(135deg, rgba(30, 58, 95, 0.08), rgba(45, 90, 63, 0.08));
-      border-right: 4px solid #2d5a3f;
-      border-radius: 8px;
-      padding: 1.25rem;
-      margin: 1rem 0;
-      transition: all 0.3s ease;
-    }
-
-    .vocab-highlight:hover {
-      background: linear-gradient(135deg, rgba(30, 58, 95, 0.12), rgba(45, 90, 63, 0.12));
-      transform: translateX(-4px);
-    }
-
-    /* Button styles */
     .primary-btn {
-      position: relative;
-      overflow: hidden;
       transition: all 0.3s ease;
       font-weight: 600;
-      letter-spacing: 0.5px;
       cursor: pointer;
       border: none;
       outline: none;
     }
 
-    .primary-btn:not(:disabled):active {
-      transform: scale(0.98);
-    }
-
     .secondary-btn {
-      position: relative;
       transition: all 0.3s ease;
       font-weight: 600;
       cursor: pointer;
@@ -209,678 +203,202 @@
       box-shadow: 0 8px 16px rgba(45, 90, 63, 0.3) !important;
     }
 
-    /* Table enhancement */
-    table {
-      border-collapse: collapse;
-      font-size: 0.95rem;
-    }
-
-    table th {
-      background: linear-gradient(135deg, #1e3a5f, #2d5a3f);
-      color: white;
-      padding: 1rem;
-      text-align: right;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    table td {
-      padding: 0.875rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      text-align: right;
-    }
-
-    table tbody tr:hover {
-      background-color: rgba(45, 90, 63, 0.05);
-      transition: background-color 0.2s ease;
-    }
-
-    /* Grid layout for dinosaur cards */
-    .dino-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .dino-card {
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 2px solid;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .dino-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, currentColor, transparent);
-    }
-
-    .dino-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .dino-card-icon {
-      font-size: 3.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
-    }
-
-    /* Author section */
-    .author-section {
-      background: linear-gradient(135deg, rgba(30, 58, 95, 0.1), rgba(45, 90, 63, 0.1));
-      border-left: 4px solid #d4af37;
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 2rem;
-      font-style: italic;
-    }
-
-    /* Content area */
-    #content-area {
-      min-height: 600px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Responsive design */
     @media (max-width: 768px) {
-      .dino-grid {
-        grid-template-columns: 1fr;
+      .vocab-tooltip {
+        max-width: calc(100vw - 40px);
+        left: 20px !important;
+        right: 20px !important;
       }
-
-      .nav-button {
-        padding: 0.75rem 1rem !important;
-        font-size: 0.9rem;
-      }
-
-      .dino-icon {
-        font-size: 2.5rem;
-      }
-
-      .lesson-header {
-        padding: 1.5rem 0;
-      }
-    }
-
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(45, 90, 63, 0.4);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(45, 90, 63, 0.6);
-    }
-
-    /* Text selection */
-    ::selection {
-      background: rgba(45, 90, 63, 0.2);
-      color: #1a1a1a;
-    }
-
-    ::-moz-selection {
-      background: rgba(45, 90, 63, 0.2);
-      color: #1a1a1a;
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
- <body class="h-full">
+</head>
+<body class="h-full">
   <div id="app" class="w-full h-full overflow-auto"></div>
+  
   <script>
-    const defaultConfig = {
-      lesson_title: "الديناصورات عاشت في عُمان",
-      lesson_subtitle: "الدرس الثاني",
-      author_name: "د. محمد بن هلال الكندي",
-      teacher_name: "الأستاذ خليل البلوشي",
-      school_name: "مدرسة سعد بن معاذ للتعليم الأساسي",
-      ministry: "وزارة التعليم - سلطنة عمان",
-      next_button_text: "التالي",
-      previous_button_text: "السابق",
-      background_color: "#f8f9fa",
-      surface_color: "#ffffff",
-      text_color: "#1a1a1a",
-      primary_action_color: "#2d5a3f",
-      secondary_action_color: "#6b8e23",
-      font_family: "Tajawal",
-      font_size: 16
+    // قاعدة بيانات المفردات
+    const vocabularyDatabase = {
+      'أبرز': { meaning: 'أوضح وأظهر وأهم', opposite: 'أخفى، أقل أهمية' },
+      'حقبة': { meaning: 'فترة زمنية طويلة، عصر', opposite: 'لحظة، فترة قصيرة' },
+      'التباين': { meaning: 'الاختلاف والتنوع الواضح', opposite: 'التشابه، التماثل' },
+      'مصابّ': { meaning: 'موضع التقاء مياه الأنهار والأودية', opposite: 'منبع' },
+      'المناخ': { meaning: 'حالة الجو في منطقة كبيرة خلال مدة زمنية طويلة', opposite: null },
+      'الرواسب': { meaning: 'مواد تحملها المياه الجارية وتترسب في الأودية', opposite: null },
+      'انحدرت': { meaning: 'نزلت من أعلى إلى أسفل', opposite: 'ارتفعت، صعدت' },
+      'ترسيب': { meaning: 'إسقاط المواد وتجميعها في مكان', opposite: 'إذابة، تفتيت' },
+      'التحلُّل': { meaning: 'التفكك والتعفن وفقدان التماسك', opposite: 'التماسك، الحفظ' },
+      'تماثُل': { meaning: 'التشابه والمطابقة', opposite: 'اختلاف، تباين' },
+      'ازدهار': { meaning: 'النمو والتطور والوصول للقمة', opposite: 'تدهور، انحطاط' },
+      'المفترسة': { meaning: 'الحيوانات التي تصطاد وتأكل حيوانات أخرى', opposite: 'الفريسة' },
+      'المفترسات': { meaning: 'الحيوانات التي تصطاد وتأكل حيوانات أخرى', opposite: 'الفريسة' },
+      'أضخم': { meaning: 'أكبر حجماً وأعظم', opposite: 'أصغر، أدق' },
+      'محصورًا': { meaning: 'مقتصراً ومحدوداً في مكان معين', opposite: 'منتشراً، شائعاً' },
+      'الدهشة': { meaning: 'التعجب والاستغراب الشديد', opposite: 'اللامبالاة، التوقع' }
     };
 
     let currentSection = 0;
     const totalSections = 7;
+    let activeTooltip = null;
 
-    async function onConfigChange(config) {
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'Cairo, Segoe UI, Tahoma, sans-serif';
+    function showVocabTooltip(event, word) {
+      const vocabData = vocabularyDatabase[word];
+      if (!vocabData) return;
+
+      if (activeTooltip) {
+        activeTooltip.remove();
+      }
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'vocab-tooltip';
       
-      const app = document.getElementById('app');
-      if (!app) return;
+      let tooltipHTML = '<div class="vocab-tooltip-close" onclick="closeVocabTooltip()">×</div>' +
+        '<div style="font-size: 1.5em; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid rgba(255, 255, 255, 0.4); padding-bottom: 12px;">' +
+        '📚 ' + word +
+        '</div>' +
+        '<div style="font-size: 1.1em; line-height: 1.7; margin-bottom: 10px;">' +
+        '<strong>💡 المعنى:</strong> ' + vocabData.meaning +
+        '</div>';
 
-      app.style.backgroundColor = config.background_color || defaultConfig.background_color;
-      app.style.color = config.text_color || defaultConfig.text_color;
-      app.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      app.style.fontSize = `${baseFont}px`;
-
-      const title = document.getElementById('lesson-title');
-      if (title) {
-        title.textContent = config.lesson_title || defaultConfig.lesson_title;
-        title.style.color = config.text_color || defaultConfig.text_color;
-        title.style.fontSize = `${baseFont * 2}px`;
-        title.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      if (vocabData.opposite) {
+        tooltipHTML += '<div style="font-size: 1.05em; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.3); font-style: italic;">' +
+          '<strong>⚖️ المضاد:</strong> ' + vocabData.opposite +
+          '</div>';
       }
 
-      const subtitle = document.getElementById('lesson-subtitle');
-      if (subtitle) {
-        subtitle.textContent = config.lesson_subtitle || defaultConfig.lesson_subtitle;
-        subtitle.style.color = config.text_color || defaultConfig.text_color;
-        subtitle.style.fontSize = `${baseFont * 1.2}px`;
-        subtitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      tooltip.innerHTML = tooltipHTML;
+      document.body.appendChild(tooltip);
+
+      const rect = event.target.getBoundingClientRect();
+      let top = rect.bottom + window.scrollY + 15;
+      let left = rect.left + window.scrollX - 150;
+
+      if (left < 20) left = 20;
+      if (left + 380 > window.innerWidth) left = window.innerWidth - 400;
+
+      tooltip.style.top = top + 'px';
+      tooltip.style.left = left + 'px';
+      activeTooltip = tooltip;
+
+      setTimeout(function() {
+        document.addEventListener('click', closeTooltipOnClickOutside);
+      }, 100);
+    }
+
+    function closeVocabTooltip() {
+      if (activeTooltip) {
+        activeTooltip.remove();
+        activeTooltip = null;
+        document.removeEventListener('click', closeTooltipOnClickOutside);
       }
+    }
 
-      const teacherInfo = document.getElementById('teacher-info');
-      if (teacherInfo) {
-        teacherInfo.innerHTML = `
-          <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.9}px;">📚 <strong>${config.teacher_name || defaultConfig.teacher_name}</strong></p>
-          <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.85}px;">${config.school_name || defaultConfig.school_name}</p>
-          <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.85}px;">${config.ministry || defaultConfig.ministry}</p>
-        `;
-        teacherInfo.style.color = config.text_color || defaultConfig.text_color;
-        teacherInfo.style.fontFamily = `${customFont}, ${baseFontStack}`;
+    function closeTooltipOnClickOutside(event) {
+      if (activeTooltip && !activeTooltip.contains(event.target) && !event.target.classList.contains('vocab-word')) {
+        closeVocabTooltip();
       }
+    }
 
-      const author = document.getElementById('author-name');
-      if (author) {
-        author.textContent = `باحث وكاتب عُماني: ${config.author_name || defaultConfig.author_name}`;
-        author.style.color = config.text_color || defaultConfig.text_color;
-        author.style.fontSize = `${baseFont * 0.95}px`;
-        author.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      }
+    window.closeVocabTooltip = closeVocabTooltip;
 
-      const cards = document.querySelectorAll('.section-card');
-      cards.forEach(card => {
-        card.style.backgroundColor = config.surface_color || defaultConfig.surface_color;
-        card.style.color = config.text_color || defaultConfig.text_color;
+    function attachVocabListeners() {
+      const vocabWords = document.querySelectorAll('.vocab-word');
+      vocabWords.forEach(function(word) {
+        word.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const wordText = e.target.getAttribute('data-word');
+          showVocabTooltip(e, wordText);
+        });
       });
-
-      const headings = document.querySelectorAll('h2, h3, h4');
-      headings.forEach(heading => {
-        heading.style.color = config.text_color || defaultConfig.text_color;
-        heading.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        const level = parseInt(heading.tagName.substring(1));
-        heading.style.fontSize = `${baseFont * (2.5 - level * 0.3)}px`;
-      });
-
-      const paragraphs = document.querySelectorAll('p, li, label');
-      paragraphs.forEach(p => {
-        p.style.color = config.text_color || defaultConfig.text_color;
-        p.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        p.style.fontSize = `${baseFont}px`;
-      });
-
-      const primaryButtons = document.querySelectorAll('.primary-btn');
-      primaryButtons.forEach(btn => {
-        btn.style.backgroundColor = config.primary_action_color || defaultConfig.primary_action_color;
-        btn.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        btn.style.fontSize = `${baseFont}px`;
-        
-        if (btn.id === 'next-btn') {
-          btn.textContent = config.next_button_text || defaultConfig.next_button_text + ' →';
-        } else if (btn.id === 'prev-btn') {
-          btn.textContent = '← ' + (config.previous_button_text || defaultConfig.previous_button_text);
-        }
-      });
-
-      const secondaryButtons = document.querySelectorAll('.secondary-btn');
-      secondaryButtons.forEach(btn => {
-        btn.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        btn.style.fontSize = `${baseFont * 0.9}px`;
-      });
-
-      const progressBar = document.querySelector('.progress-bar');
-      if (progressBar) {
-        progressBar.style.backgroundColor = config.primary_action_color || defaultConfig.primary_action_color;
-      }
     }
 
     function renderApp() {
       const app = document.getElementById('app');
-      const config = window.elementSdk?.config || defaultConfig;
+      const progress = ((currentSection + 1) / totalSections) * 100;
+      const prevDisabled = currentSection === 0 ? 'disabled' : '';
+      const nextDisabled = currentSection === totalSections - 1 ? 'disabled' : '';
       
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'Cairo, Segoe UI, Tahoma, sans-serif';
-      
-      app.innerHTML = `
-        <div class="w-full min-h-full" style="background-color: ${config.background_color || defaultConfig.background_color}; color: ${config.text_color || defaultConfig.text_color}; padding: 1.5rem 1rem; font-family: ${customFont}, ${baseFontStack};">
-          <div class="max-w-5xl mx-auto">
-            <!-- Header with Teacher Info -->
-            <div class="lesson-header fade-in mb-8">
-              <div class="text-center">
-                <div class="text-6xl mb-4 animate-bounce" style="animation-iteration-count: 1;">🦕</div>
-                <h1 id="lesson-title" class="mb-2" style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${baseFont * 2}px; font-family: ${customFont}, ${baseFontStack}; margin: 0;">${config.lesson_title || defaultConfig.lesson_title}</h1>
-                <p id="lesson-subtitle" class="mb-4" style="color: ${config.text_color || defaultConfig.text_color}; font-size: ${baseFont * 1.2}px; font-family: ${customFont}, ${baseFontStack}; margin: 0; opacity: 0.8;">${config.lesson_subtitle || defaultConfig.lesson_subtitle}</p>
-                
-                <!-- Teacher Information -->
-                <div id="teacher-info" class="mt-4 pt-4 border-t-2" style="border-color: rgba(0,0,0,0.1); color: ${config.text_color || defaultConfig.text_color}; font-family: ${customFont}, ${baseFontStack};">
-                  <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.9}px;">📚 <strong>${config.teacher_name || defaultConfig.teacher_name}</strong></p>
-                  <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.85}px;">${config.school_name || defaultConfig.school_name}</p>
-                  <p style="margin: 0.5rem 0; font-size: ${baseFont * 0.85}px;">${config.ministry || defaultConfig.ministry}</p>
-                </div>
-                
-                <!-- Progress Bar -->
-                <div class="w-full h-3 rounded-full mt-6 mb-4" style="background-color: rgba(0,0,0,0.08);">
-                  <div class="progress-bar h-full rounded-full" style="width: ${((currentSection + 1) / totalSections) * 100}%; background-color: ${config.primary_action_color || defaultConfig.primary_action_color};"></div>
-                </div>
-                <p class="progress-section" style="font-size: ${baseFont * 0.85}px; color: ${config.text_color || defaultConfig.text_color}; font-family: ${customFont}, ${baseFontStack}; justify-content: center;">
-                  <span>📍 القسم ${currentSection + 1} من ${totalSections}</span>
-                </p>
-              </div>
-            </div>
-
-            <!-- Content Area -->
-            <div id="content-area" class="mb-8">
-              ${renderSection(currentSection)}
-            </div>
-
-            <!-- Navigation -->
-            <div class="flex justify-between items-center mt-12 gap-4 flex-wrap">
-              <button id="prev-btn" class="primary-btn nav-button px-8 py-3 rounded-lg text-white font-semibold" 
-                      style="background-color: ${config.primary_action_color || defaultConfig.primary_action_color}; font-size: ${baseFont}px; font-family: ${customFont}, ${baseFontStack}; min-width: 140px;"
-                      ${currentSection === 0 ? 'disabled' : ''}>
-                ← ${config.previous_button_text || defaultConfig.previous_button_text}
-              </button>
-              
-              <div style="text-align: center; flex: 1;">
-                <span style="font-size: ${baseFont * 0.9}px; opacity: 0.6; font-family: ${customFont}, ${baseFontStack};">تحديث ${new Date().getFullYear()} - درس تفاعلي</span>
-              </div>
-              
-              <button id="next-btn" class="primary-btn nav-button px-8 py-3 rounded-lg text-white font-semibold"
-                      style="background-color: ${config.primary_action_color || defaultConfig.primary_action_color}; font-size: ${baseFont}px; font-family: ${customFont}, ${baseFontStack}; min-width: 140px;"
-                      ${currentSection === totalSections - 1 ? 'disabled' : ''}>
-                ${config.next_button_text || defaultConfig.next_button_text} →
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
+      app.innerHTML = '<div class="w-full min-h-full" style="background-color: #f8f9fa; color: #1a1a1a; padding: 1.5rem 1rem; font-family: Tajawal, Cairo, sans-serif;">' +
+          '<div class="max-w-5xl mx-auto">' +
+            '<div class="fade-in mb-8" style="position: relative; padding: 2.5rem 0; background: linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, rgba(45, 90, 63, 0.08) 100%); border-radius: 16px; border-bottom: 3px solid #d4af37;">' +
+              '<div class="text-center">' +
+                '<div class="text-6xl mb-4">🦕</div>' +
+                '<h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">الديناصورات عاشت في عُمان</h1>' +
+                '<p style="font-size: 1.2rem; margin: 0 0 1rem 0; opacity: 0.8;">الدرس الثاني</p>' +
+                '<div class="mt-4 pt-4" style="border-top: 2px solid rgba(0,0,0,0.1);">' +
+                  '<p style="margin: 0.5rem 0; font-size: 0.9rem;">📚 <strong>الأستاذ خليل البلوشي</strong></p>' +
+                  '<p style="margin: 0.5rem 0; font-size: 0.85rem;">مدرسة سعد بن معاذ للتعليم الأساسي</p>' +
+                  '<p style="margin: 0.5rem 0; font-size: 0.85rem;">وزارة التعليم - سلطنة عمان</p>' +
+                '</div>' +
+                '<div class="w-full h-3 rounded-full mt-6 mb-4" style="background-color: rgba(0,0,0,0.08);">' +
+                  '<div class="progress-bar h-full rounded-full" style="width: ' + progress + '%;"></div>' +
+                '</div>' +
+                '<p style="font-size: 0.85rem; display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">' +
+                  '<span>📍 القسم ' + (currentSection + 1) + ' من ' + totalSections + '</span>' +
+                '</p>' +
+              '</div>' +
+            '</div>' +
+            '<div id="content-area" class="mb-8">' +
+              renderSection(currentSection) +
+            '</div>' +
+            '<div class="flex justify-between items-center mt-12 gap-4 flex-wrap">' +
+              '<button id="prev-btn" class="primary-btn nav-button px-8 py-3 rounded-lg text-white font-semibold" style="background-color: #2d5a3f; font-size: 16px; min-width: 140px;" ' + prevDisabled + '>← السابق</button>' +
+              '<div style="text-align: center; flex: 1;"><span style="font-size: 0.9rem; opacity: 0.6;">تحديث 2025 - درس تفاعلي</span></div>' +
+              '<button id="next-btn" class="primary-btn nav-button px-8 py-3 rounded-lg text-white font-semibold" style="background-color: #2d5a3f; font-size: 16px; min-width: 140px;" ' + nextDisabled + '>التالي →</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
 
       attachEventListeners();
+      attachVocabListeners();
     }
 
     function renderSection(index) {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'Cairo, Segoe UI, Tahoma, sans-serif';
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const surfaceColor = '#ffffff';
+      const primaryColor = '#2d5a3f';
 
-      switch(index) {
-        case 0:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">🦕</span>
-                <h2 class="font-bold mt-4 mb-6" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">نص الدرس</h2>
-              </div>
-              <div style="color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; font-size: ${baseFont}px; line-height: 2;">
-                <p class="mb-4">تُعَدُّ الديناصوراتُ من أبرز ملامح الحياة خلال حقبة الحياة المتوسطة على الإطلاق، فقد كانت هذه الزواحف العملاقة أكبرَ الحيوانات التي عاشت على ظهر اليابسة، وقد تميَّزت أنواعُها المختلفة التي ظهرت بالتباين الشديد في الأشكال والأحجام والسلوك والنظام الغذائي.</p>
-                
-                <p class="mb-4">وقد عُثِرَ على عظامٍ كبيرةٍ للديناصورات في مواقع عدّة في محيط قرية الحوض بولاية السيب، ومنطقة السيح الأحمر بولاية بدبد.</p>
-                
-                <p class="mb-4">وتُعَدُّ هذه المواقعُ أفضلَ مواقع عظام الديناصورات المتحجِّرة في شبه الجزيرة العربية، وقد كانت هذه المواقع في العصر الطباشيري عبارةً عن مصابّ أنهارٍ نشِطة، تكوَّنت في مناخٍ أكثر رطوبة، وانحدرت من الجبال في صورةٍ شبيهةٍ باليوم، وكانت الأنهارُ تحمل هذه العظام والأخشاب المتحجِّرة، وتُعيد ترسيبَها في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر، وربما يُفسِّر هذا الأمر عدمَ العثور على هيكلٍ متكاملٍ للديناصورات في هذه الصخور حتى اليوم، ثم غُطِّيَت العظامُ والأخشاب بعد ذلك بالرواسب، ومع نقص الأكسجين في هذه الرواسب حُفِظَت هذه المواد من التحلُّل.</p>
-                
-                <div class="vocab-highlight">
-                  <p class="font-semibold mb-2" style="color: ${primaryColor}; font-size: ${baseFont * 1.1}px;">💡 الأنواع المكتشفة</p>
-                  <p>وقد استطاع الباحثون التعرُّفَ على أربعة أنواع مختلفة من الديناصورات كانت تعيش في عُمان:</p>
-                </div>
-
-                <h3 class="font-bold mt-6 mb-3" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor};">النوع الأول: أورنيثوبود (Ornithopod) – أقدام الطير</h3>
-                <p class="mb-4">وهو آكلُ النباتات الصغيرة، واسمُه باللاتينية يعني (أقدام الطير)، وهذا الاسم أُطلِقَ عليه لتماثُل أقدامِه ذات الأصابع الثلاثة مع أقدام الطير، وفي ذروة ازدهارها وصل طولها إلى نحو خمسة عشر مترًا، ووزنها إلى نحو عشرين طنًّا.</p>
-
-                <h3 class="font-bold mt-6 mb-3" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor};">النوع الثاني: ثيروبود (Theropod) – أقدام الوحش</h3>
-                <p class="mb-4">وهو من الديناصورات المفترسة، أشهر آكلات اللحوم، وهي المفترسات الأكبر على اليابسة، واسمها باللاتينية يعني (أقدام الوحش).</p>
-
-                <h3 class="font-bold mt-6 mb-3" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor};">النوع الثالث: ساوروبود (Sauropod) – أقدام السحالي</h3>
-                <p class="mb-4">فهو أحد أضخم الكائنات التي عاشت على اليابسة على الإطلاق، وكانت هذه الديناصورات تأكل الأعشاب والنباتات، واسمها باللاتينية يعني (أقدام السحالي)، وبعض أنواعها قد يصل طولها إلى أكثر من ثلاثين مترًا، وارتفاعها إلى نحو ثمانية عشر مترًا.</p>
-
-                <h3 class="font-bold mt-6 mb-3" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor};">النوع الرابع: هادروسورس (Hadrosaurus) – السحلية القوية</h3>
-                <p class="mb-4">أمّا عظامُ الديناصور المكتشَف حديثًا في عام (1987م)، فقد تكون لديناصورٍ ذي منقارٍ يشبه منقارَ البطّة يأكل به النباتات، وهو معروف باسم (السحلية القوية).</p>
-
-                <p class="mb-4">إنَّ العثورَ على هذا النوع الأخير من الديناصورات يُعَدُّ أمرًا مثيرًا للدهشة؛ فهذا النوع كان وجودُه محصورًا في القارات الشمالية، وبالتحديد في أمريكا الشمالية وأوروبا وآسيا، ولذلك فإن وجودَه في شبه الجزيرة العربية أو إفريقيا لم يكن معروفًا من قبل، وقد عُثِرَ على العظام في محيط قرية الحوض، حيث كانت القرية مليئةً بالأنهار والأشجار عندما عاشت فيها الديناصورات.</p>
-                
-                <div class="author-section">
-                  <p id="author-name" style="color: ${textColor}; font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack}; margin: 0.5rem 0;">باحث وكاتب عُماني: ${config.author_name || defaultConfig.author_name}</p>
-                  <p style="color: ${textColor}; font-size: ${baseFont * 0.85}px; font-family: ${customFont}, ${baseFontStack}; margin: 0.5rem 0;">"قصة الحياة في عُمان" – 2015م (بتصرّف)</p>
-                </div>
-              </div>
-            </div>
-          `;
-
-        case 1:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">📚</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">أولاً: ثروتي اللغوية</h2>
-              </div>
-              
-              <div class="mb-8">
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.3}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">1️⃣ استبدل بالكلمات التي تحتها خط كلمات تؤدي المعنى نفسه:</h3>
-                <div style="background-color: rgba(0,0,0,0.03); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border-right: 4px solid ${primaryColor};">
-                  <p style="font-size: ${baseFont}px; line-height: 2; color: ${textColor};">تُعَدُّ الديناصوراتُ من <span style="border-bottom: 3px solid ${primaryColor}; font-weight: bold;">أبرز</span> ملامح الحياة خلال <span style="border-bottom: 3px solid ${primaryColor}; font-weight: bold;">حقبة</span> الحياة المتوسطة على الإطلاق، فقد كانت هذه الزواحف العملاقة أكبر الحيوانات التي عاشت على ظهر اليابسة، وقد تميَّزت أنواعُها المختلفة التي ظهرت <span style="border-bottom: 3px solid ${primaryColor}; font-weight: bold;">بالتباين</span> الشديد في الأشكال والأحجام.</p>
-                </div>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showVocab1Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="vocab1-answer" class="mt-4"></div>
-              </div>
-
-              <div class="mb-8">
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.3}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">2️⃣ استخرج من النص الكلمات التي تدل على المعاني الآتية:</h3>
-                <div class="space-y-3 mb-4">
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
-                    <p style="font-size: ${baseFont}px; color: ${textColor};">أ. موضع التقاء مياه الأنهار والأودية</p>
-                  </div>
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
-                    <p style="font-size: ${baseFont}px; color: ${textColor};">ب. حالة الجو في منطقة كبيرة خلال مدة زمنية طويلة</p>
-                  </div>
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
-                    <p style="font-size: ${baseFont}px; color: ${textColor};">ج. مواد تحملها المياه الجارية إلى الأودية</p>
-                  </div>
-                </div>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showVocab2Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="vocab2-answer" class="mt-4"></div>
-              </div>
-
-              <div>
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.3}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">3️⃣ حاكِ الأسلوب الآتي:</h3>
-                <div style="padding: 1.5rem; background-color: rgba(0,0,0,0.05); border-radius: 12px; border-right: 4px solid ${primaryColor}; margin-bottom: 1.5rem;">
-                  <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">تُعَدُّ الديناصوراتُ من أبرز ملامح الحياة خلال حقبة الحياة المتوسطة.</p>
-                </div>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showVocab3Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="vocab3-answer" class="mt-4"></div>
-              </div>
-            </div>
-          `;
-
-        case 2:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">💭</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">ثانياً: أناقش وأحلل</h2>
-              </div>
-              
-              <div class="mb-8">
-                <h3 class="font-bold mb-3" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">1️⃣ استنتج الفكرة العامة للنص</h3>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showDiscussion1Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="discussion1-answer" class="mt-4"></div>
-              </div>
-
-              <div class="mb-8">
-                <h3 class="font-bold mb-3" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">2️⃣ لماذا لم يعثر علماء الطبيعة على هيكل ديناصور متكامل في سلطنة عُمان؟</h3>
-                <p class="mb-2" style="font-size: ${baseFont * 0.9}px; color: ${textColor}; opacity: 0.8;">(ادعم إجابتك بشاهد من النص)</p>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showDiscussion2Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="discussion2-answer" class="mt-4"></div>
-              </div>
-
-              <div>
-                <h3 class="font-bold mb-3" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">3️⃣ الأخشاب والعظام لم تتحلّل رغم مرور ملايين السنين. علّل ذلك:</h3>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showDiscussion3Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="discussion3-answer" class="mt-4"></div>
-              </div>
-            </div>
-          `;
-
-        case 3:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">📊</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">ثالثاً: أصنّف</h2>
-              </div>
-              
-              <div class="mb-8">
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">4️⃣ صنِّف الديناصورات المكتشفة عظامها في عُمان:</h3>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showClassificationAnswer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="classification-answer" class="mt-4"></div>
-              </div>
-
-              <div>
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">5️⃣ يُعَدُّ وجود ديناصور (السحلية القوية) في الجزيرة العربية أمرًا مثيرًا للدهشة.</h3>
-                <div class="mb-4">
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor};">أ. اذكر السبب</p>
-                </div>
-                <div class="mb-4">
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor};">ب. اقترح سببًا علميًّا محتملًا</p>
-                </div>
-                <button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showQuestion5Answer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="question5-answer" class="mt-4"></div>
-              </div>
-            </div>
-          `;
-
-        case 4:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">🔍</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">سادساً: أميّز</h2>
-              </div>
-              
-              <div class="mb-8">
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">6️⃣ نص (الديناصورات عاشت في عُمان) نصٌّ علميٌّ له خصائص تميّزه عن غيره من النصوص.</h3>
-                <p class="mb-4" style="font-size: ${baseFont}px; color: ${textColor};">ضع علامة (✔) أمام ما يتناسب أسلوب النص من خصائص:</p>
-                
-                <div class="space-y-3 mb-4">
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ${primaryColor};">
-                    <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">• استخدام الأرقام والكلمات العلمية.</p>
-                  </div>
-                  
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
-                    <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">• وجود حوار بين الشخصيات.</p>
-                  </div>
-                  
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ${primaryColor};">
-                    <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">• استخدام الرسوم والصور أحيانًا لتوضيح النص.</p>
-                  </div>
-                  
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
-                    <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">• سرد حكايات خيالية عن الديناصورات.</p>
-                  </div>
-                  
-                  <div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ${primaryColor};">
-                    <p style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">• وضوح الأفكار ودقّة المعلومات.</p>
-                  </div>
-                </div>
-                
-                <button class="secondary-btn px-6 py-3 rounded-lg text-white font-semibold" 
-                        style="font-size: ${baseFont * 0.95}px; font-family: ${customFont}, ${baseFontStack};"
-                        onclick="showDistinguishAnswer()">
-                  📖 عرض الإجابة النموذجية
-                </button>
-                <div id="distinguish-answer" class="mt-4"></div>
-              </div>
-
-              <div>
-                <h3 class="font-bold mb-4" style="font-size: ${baseFont * 1.2}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack};">7️⃣ هل تحب قراءة هذا النوع من النصوص العلمية؟ لماذا؟</h3>
-                <p style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; font-size: ${baseFont * 0.95}px; color: ${textColor};">هذا سؤال رأي شخصي - يمكن للطالب التعبير عن رأيه الخاص وتبرير موقفه. 💭</p>
-              </div>
-            </div>
-          `;
-
-        case 5:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">🦖</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">أنواع الديناصورات في عُمان</h2>
-              </div>
-              
-              <div class="dino-grid">
-                <div class="dino-card" style="background-color: rgba(45, 90, 63, 0.1); border-color: ${primaryColor}; color: ${textColor};">
-                  <div class="dino-card-icon">🦕</div>
-                  <h3 class="font-bold mb-2" style="font-size: ${baseFont * 1.2}px; color: ${primaryColor}; margin: 0;">أورنيثوبود</h3>
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">أقدام الطير</p>
-                  <ul style="font-size: ${baseFont * 0.9}px; color: ${textColor}; padding-right: 1rem; margin: 0;">
-                    <li>آكل النباتات الصغيرة</li>
-                    <li>أقدام ثلاثية الأصابع</li>
-                    <li>الطول: 15 متر</li>
-                    <li>الوزن: 20 طن</li>
-                  </ul>
-                </div>
-
-                <div class="dino-card" style="background-color: rgba(107, 142, 35, 0.1); border-color: ${secondaryColor}; color: ${textColor};">
-                  <div class="dino-card-icon">🦖</div>
-                  <h3 class="font-bold mb-2" style="font-size: ${baseFont * 1.2}px; color: ${secondaryColor}; margin: 0;">ثيروبود</h3>
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">أقدام الوحش</p>
-                  <ul style="font-size: ${baseFont * 0.9}px; color: ${textColor}; padding-right: 1rem; margin: 0;">
-                    <li>ديناصور مفترس</li>
-                    <li>أشهر آكلات اللحوم</li>
-                    <li>المفترس الأكبر على اليابسة</li>
-                  </ul>
-                </div>
-
-                <div class="dino-card" style="background-color: rgba(45, 90, 63, 0.1); border-color: ${primaryColor}; color: ${textColor};">
-                  <div class="dino-card-icon">🦕</div>
-                  <h3 class="font-bold mb-2" style="font-size: ${baseFont * 1.2}px; color: ${primaryColor}; margin: 0;">ساوروبود</h3>
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">أقدام السحالي</p>
-                  <ul style="font-size: ${baseFont * 0.9}px; color: ${textColor}; padding-right: 1rem; margin: 0;">
-                    <li>أضخم الكائنات على اليابسة</li>
-                    <li>يأكل الأعشاب والنباتات</li>
-                    <li>الطول: 30+ متر</li>
-                    <li>الارتفاع: 18 متر</li>
-                  </ul>
-                </div>
-
-                <div class="dino-card" style="background-color: rgba(107, 142, 35, 0.1); border-color: ${secondaryColor}; color: ${textColor};">
-                  <div class="dino-card-icon">🦆</div>
-                  <h3 class="font-bold mb-2" style="font-size: ${baseFont * 1.2}px; color: ${secondaryColor}; margin: 0;">هادروسورس</h3>
-                  <p class="font-semibold mb-2" style="font-size: ${baseFont}px; color: ${textColor}; margin: 0;">السحلية القوية</p>
-                  <ul style="font-size: ${baseFont * 0.9}px; color: ${textColor}; padding-right: 1rem; margin: 0;">
-                    <li>له منقار يشبه البطة</li>
-                    <li>يأكل النباتات</li>
-                    <li>مكتشف في 1987م</li>
-                    <li>كان محصورًا في القارات الشمالية</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          `;
-
-        case 6:
-          return `
-            <div class="section-card p-8 fade-in" style="background-color: ${surfaceColor};">
-              <div class="text-center mb-6">
-                <span class="dino-icon">✅</span>
-                <h2 class="font-bold mt-4" style="font-size: ${baseFont * 1.8}px; color: ${textColor}; font-family: ${customFont}, ${baseFontStack}; margin: 0;">ملخص الدرس</h2>
-              </div>
-              
-              <div class="space-y-6" style="color: ${textColor}; font-size: ${baseFont}px; font-family: ${customFont}, ${baseFontStack};">
-                <div style="padding: 1.5rem; background-color: rgba(45, 90, 63, 0.1); border-radius: 12px; border-right: 4px solid ${primaryColor};">
-                  <h3 class="font-bold mb-3 flex items-center gap-2" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor}; margin: 0;">
-                    <span>🌍</span> المواقع الأثرية
-                  </h3>
-                  <ul style="padding-right: 1rem; margin: 0;">
-                    <li>قرية الحوض - ولاية السيب</li>
-                    <li>السيح الأحمر - ولاية بدبد</li>
-                    <li>أفضل مواقع عظام الديناصورات في شبه الجزيرة العربية</li>
-                  </ul>
-                </div>
-
-                <div style="padding: 1.5rem; background-color: rgba(107, 142, 35, 0.1); border-radius: 12px; border-right: 4px solid ${secondaryColor};">
-                  <h3 class="font-bold mb-3 flex items-center gap-2" style="font-size: ${baseFont * 1.3}px; color: ${secondaryColor}; margin: 0;">
-                    <span>🔬</span> الأنواع المكتشفة
-                  </h3>
-                  <ul style="padding-right: 1rem; margin: 0;">
-                    <li>أورنيثوبود (أقدام الطير) - آكل نباتات</li>
-                    <li>ثيروبود (أقدام الوحش) - مفترس</li>
-                    <li>ساوروبود (أقدام السحالي) - عملاق آكل نباتات</li>
-                    <li>هادروسورس (السحلية القوية) - منقار البطة</li>
-                  </ul>
-                </div>
-
-                <div style="padding: 1.5rem; background-color: rgba(45, 90, 63, 0.1); border-radius: 12px; border-right: 4px solid ${primaryColor};">
-                  <h3 class="font-bold mb-3 flex items-center gap-2" style="font-size: ${baseFont * 1.3}px; color: ${primaryColor}; margin: 0;">
-                    <span>💡</span> حقائق مهمة
-                  </h3>
-                  <ul style="padding-right: 1rem; margin: 0;">
-                    <li>عاشت الديناصورات في مناخ أكثر رطوبة</li>
-                    <li>كانت المنطقة مليئة بالأنهار والأشجار</li>
-                    <li>حُفظت العظام بسبب نقص الأكسجين في الرواسب</li>
-                    <li>لم يُعثر على هيكل متكامل حتى اليوم</li>
-                  </ul>
-                </div>
-
-                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor}); color: white; border-radius: 12px;">
-                  <p style="font-size: 2.5rem; margin: 0 0 1rem 0;">🎉</p>
-                  <p class="font-bold" style="font-size: ${baseFont * 1.3}px; margin: 0; letter-spacing: 1px;">أحسنت! أكملت الدرس</p>
-                  <p style="font-size: ${baseFont * 0.95}px; margin: 0.5rem 0 0 0; opacity: 0.95;">استمر في التعلم والاستكشاف</p>
-                </div>
-              </div>
-            </div>
-          `;
-
-        default:
-          return '';
+      if (index === 0) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';">' +
+          '<div class="text-center mb-6"><span class="dino-icon">🦕</span><h2 class="font-bold mt-4 mb-6" style="font-size: 1.8rem; margin: 0;">نص الدرس</h2></div>' +
+          '<div class="vocab-legend"><div class="vocab-legend-content"><span style="font-size: 1.5rem;">💡</span><span>انقر على الكلمات الملونة باللون البنفسجي لمعرفة معناها ومضادها</span></div></div>' +
+          '<div style="font-size: 16px; line-height: 2;">' +
+            '<p class="mb-4">تُعَدُّ الديناصوراتُ من <span class="vocab-word" data-word="أبرز">أبرز</span> ملامح الحياة خلال <span class="vocab-word" data-word="حقبة">حقبة</span> الحياة المتوسطة على الإطلاق، فقد كانت هذه الزواحف العملاقة أكبرَ الحيوانات التي عاشت على ظهر اليابسة، وقد تميَّزت أنواعُها المختلفة التي ظهرت <span class="vocab-word" data-word="التباين">بالتباين</span> الشديد في الأشكال والأحجام والسلوك والنظام الغذائي.</p>' +
+            '<p class="mb-4">وقد عُثِرَ على عظامٍ كبيرةٍ للديناصورات في مواقع عدّة في محيط قرية الحوض بولاية السيب، ومنطقة السيح الأحمر بولاية بدبد.</p>' +
+            '<p class="mb-4">وتُعَدُّ هذه المواقعُ أفضلَ مواقع عظام الديناصورات المتحجِّرة في شبه الجزيرة العربية، وقد كانت هذه المواقع في العصر الطباشيري عبارةً عن <span class="vocab-word" data-word="مصابّ">مصابّ</span> أنهارٍ نشِطة، تكوَّنت في <span class="vocab-word" data-word="المناخ">مناخٍ</span> أكثر رطوبة، <span class="vocab-word" data-word="انحدرت">وانحدرت</span> من الجبال في صورةٍ شبيهةٍ باليوم، وكانت الأنهارُ تحمل هذه العظام والأخشاب المتحجِّرة، وتُعيد <span class="vocab-word" data-word="ترسيب">ترسيبَها</span> في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر، وربما يُفسِّر هذا الأمر عدمَ العثور على هيكلٍ متكاملٍ للديناصورات في هذه الصخور حتى اليوم، ثم غُطِّيَت العظامُ والأخشاب بعد ذلك <span class="vocab-word" data-word="الرواسب">بالرواسب</span>، ومع نقص الأكسجين في هذه الرواسب حُفِظَت هذه المواد من <span class="vocab-word" data-word="التحلُّل">التحلُّل</span>.</p>' +
+            '<div style="background: linear-gradient(135deg, rgba(30, 58, 95, 0.08), rgba(45, 90, 63, 0.08)); border-right: 4px solid #2d5a3f; border-radius: 8px; padding: 1.25rem; margin: 1rem 0;"><p class="font-semibold mb-2" style="color: ' + primaryColor + '; font-size: 1.1rem;">💡 الأنواع المكتشفة</p><p>وقد استطاع الباحثون التعرُّفَ على أربعة أنواع مختلفة من الديناصورات كانت تعيش في عُمان:</p></div>' +
+            '<h3 class="font-bold mt-6 mb-3" style="font-size: 1.3rem; color: ' + primaryColor + ';">النوع الأول: أورنيثوبود (Ornithopod) – أقدام الطير</h3>' +
+            '<p class="mb-4">وهو آكلُ النباتات الصغيرة، واسمُه باللاتينية يعني (أقدام الطير)، وهذا الاسم أُطلِقَ عليه <span class="vocab-word" data-word="تماثُل">لتماثُل</span> أقدامِه ذات الأصابع الثلاثة مع أقدام الطير، وفي ذروة <span class="vocab-word" data-word="ازدهار">ازدهارها</span> وصل طولها إلى نحو خمسة عشر مترًا، ووزنها إلى نحو عشرين طنًّا.</p>' +
+            '<h3 class="font-bold mt-6 mb-3" style="font-size: 1.3rem; color: ' + primaryColor + ';">النوع الثاني: ثيروبود (Theropod) – أقدام الوحش</h3>' +
+            '<p class="mb-4">وهو من الديناصورات <span class="vocab-word" data-word="المفترسة">المفترسة</span>، أشهر آكلات اللحوم، وهي <span class="vocab-word" data-word="المفترسات">المفترسات</span> الأكبر على اليابسة، واسمها باللاتينية يعني (أقدام الوحش).</p>' +
+            '<h3 class="font-bold mt-6 mb-3" style="font-size: 1.3rem; color: ' + primaryColor + ';">النوع الثالث: ساوروبود (Sauropod) – أقدام السحالي</h3>' +
+            '<p class="mb-4">فهو أحد <span class="vocab-word" data-word="أضخم">أضخم</span> الكائنات التي عاشت على اليابسة على الإطلاق، وكانت هذه الديناصورات تأكل الأعشاب والنباتات، واسمها باللاتينية يعني (أقدام السحالي)، وبعض أنواعها قد يصل طولها إلى أكثر من ثلاثين مترًا، وارتفاعها إلى نحو ثمانية عشر مترًا.</p>' +
+            '<h3 class="font-bold mt-6 mb-3" style="font-size: 1.3rem; color: ' + primaryColor + ';">النوع الرابع: هادروسورس (Hadrosaurus) – السحلية القوية</h3>' +
+            '<p class="mb-4">أمّا عظامُ الديناصور المكتشَف حديثًا في عام (1987م)، فقد تكون لديناصورٍ ذي منقارٍ يشبه منقارَ البطّة يأكل به النباتات، وهو معروف باسم (السحلية القوية).</p>' +
+            '<p class="mb-4">إنَّ العثورَ على هذا النوع الأخير من الديناصورات يُعَدُّ أمرًا مثيرًا <span class="vocab-word" data-word="الدهشة">للدهشة</span>؛ فهذا النوع كان وجودُه <span class="vocab-word" data-word="محصورًا">محصورًا</span> في القارات الشمالية، وبالتحديد في أمريكا الشمالية وأوروبا وآسيا، ولذلك فإن وجودَه في شبه الجزيرة العربية أو إفريقيا لم يكن معروفًا من قبل، وقد عُثِرَ على العظام في محيط قرية الحوض، حيث كانت القرية مليئةً بالأنهار والأشجار عندما عاشت فيها الديناصورات.</p>' +
+            '<div style="background: linear-gradient(135deg, rgba(30, 58, 95, 0.1), rgba(45, 90, 63, 0.1)); border-left: 4px solid #d4af37; padding: 1.5rem; border-radius: 8px; text-align: center; margin-top: 2rem; font-style: italic;"><p style="margin: 0.5rem 0;">باحث وكاتب عُماني: د. محمد بن هلال الكندي</p><p style="margin: 0.5rem 0;">"قصة الحياة في عُمان" – 2015م (بتصرّف)</p></div>' +
+          '</div>' +
+        '</div>';
       }
+      // باقي الأقسام...
+      else if (index === 1) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">📚</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">أولاً: ثروتي اللغوية</h2></div><div class="mb-8"><h3 class="font-bold mb-4" style="font-size: 1.3rem;">1️⃣ استبدل بالكلمات التي تحتها خط كلمات تؤدي المعنى نفسه:</h3><div style="background-color: rgba(0,0,0,0.03); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border-right: 4px solid ' + primaryColor + ';"><p style="font-size: 16px; line-height: 2;">تُعَدُّ الديناصوراتُ من <span style="border-bottom: 3px solid ' + primaryColor + '; font-weight: bold;">أبرز</span> ملامح الحياة خلال <span style="border-bottom: 3px solid ' + primaryColor + '; font-weight: bold;">حقبة</span> الحياة المتوسطة على الإطلاق، فقد كانت هذه الزواحف العملاقة أكبر الحيوانات التي عاشت على ظهر اليابسة، وقد تميَّزت أنواعُها المختلفة التي ظهرت <span style="border-bottom: 3px solid ' + primaryColor + '; font-weight: bold;">بالتباين</span> الشديد في الأشكال والأحجام.</p></div><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showVocab1Answer()">📖 عرض الإجابة النموذجية</button><div id="vocab1-answer" class="mt-4"></div></div><div class="mb-8"><h3 class="font-bold mb-4" style="font-size: 1.3rem;">2️⃣ استخرج من النص الكلمات التي تدل على المعاني الآتية:</h3><div class="space-y-3 mb-4"><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;"><p>أ. موضع التقاء مياه الأنهار والأودية</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;"><p>ب. حالة الجو في منطقة كبيرة خلال مدة زمنية طويلة</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;"><p>ج. مواد تحملها المياه الجارية إلى الأودية</p></div></div><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showVocab2Answer()">📖 عرض الإجابة النموذجية</button><div id="vocab2-answer" class="mt-4"></div></div><div><h3 class="font-bold mb-4" style="font-size: 1.3rem;">3️⃣ حاكِ الأسلوب الآتي:</h3><div style="padding: 1.5rem; background-color: rgba(0,0,0,0.05); border-radius: 12px; border-right: 4px solid ' + primaryColor + '; margin-bottom: 1.5rem;"><p style="margin: 0;">تُعَدُّ الديناصوراتُ من أبرز ملامح الحياة خلال حقبة الحياة المتوسطة.</p></div><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showVocab3Answer()">📖 عرض الإجابة النموذجية</button><div id="vocab3-answer" class="mt-4"></div></div></div>';
+      }
+      else if (index === 2) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">💭</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">ثانياً: أناقش وأحلل</h2></div><div class="mb-8"><h3 class="font-bold mb-3" style="font-size: 1.2rem;">1️⃣ استنتج الفكرة العامة للنص</h3><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showDiscussion1Answer()">📖 عرض الإجابة النموذجية</button><div id="discussion1-answer" class="mt-4"></div></div><div class="mb-8"><h3 class="font-bold mb-3" style="font-size: 1.2rem;">2️⃣ لماذا لم يعثر علماء الطبيعة على هيكل ديناصور متكامل في سلطنة عُمان؟</h3><p class="mb-2" style="font-size: 0.9rem; opacity: 0.8;">(ادعم إجابتك بشاهد من النص)</p><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showDiscussion2Answer()">📖 عرض الإجابة النموذجية</button><div id="discussion2-answer" class="mt-4"></div></div><div><h3 class="font-bold mb-3" style="font-size: 1.2rem;">3️⃣ الأخشاب والعظام لم تتحلّل رغم مرور ملايين السنين. علّل ذلك:</h3><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showDiscussion3Answer()">📖 عرض الإجابة النموذجية</button><div id="discussion3-answer" class="mt-4"></div></div></div>';
+      }
+      else if (index === 3) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">📊</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">ثالثاً: أصنّف</h2></div><div class="mb-8"><h3 class="font-bold mb-4" style="font-size: 1.2rem;">4️⃣ صنِّف الديناصورات المكتشفة عظامها في عُمان:</h3><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showClassificationAnswer()">📖 عرض الإجابة النموذجية</button><div id="classification-answer" class="mt-4"></div></div><div><h3 class="font-bold mb-4" style="font-size: 1.2rem;">5️⃣ يُعَدُّ وجود ديناصور (السحلية القوية) في الجزيرة العربية أمرًا مثيرًا للدهشة.</h3><div class="mb-4"><p class="font-semibold mb-2">أ. اذكر السبب</p></div><div class="mb-4"><p class="font-semibold mb-2">ب. اقترح سببًا علميًّا محتملًا</p></div><button class="secondary-btn mt-4 px-6 py-3 rounded-lg text-white font-semibold" onclick="showQuestion5Answer()">📖 عرض الإجابة النموذجية</button><div id="question5-answer" class="mt-4"></div></div></div>';
+      }
+      else if (index === 4) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">🔍</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">سادساً: أميّز</h2></div><div class="mb-8"><h3 class="font-bold mb-4" style="font-size: 1.2rem;">6️⃣ نص (الديناصورات عاشت في عُمان) نصٌّ علميٌّ له خصائص تميّزه عن غيره من النصوص.</h3><p class="mb-4">ضع علامة (✔) أمام ما يتناسب أسلوب النص من خصائص:</p><div class="space-y-3 mb-4"><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ' + primaryColor + ';"><p style="margin: 0;">• استخدام الأرقام والكلمات العلمية.</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;"><p style="margin: 0;">• وجود حوار بين الشخصيات.</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ' + primaryColor + ';"><p style="margin: 0;">• استخدام الرسوم والصور أحيانًا لتوضيح النص.</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;"><p style="margin: 0;">• سرد حكايات خيالية عن الديناصورات.</p></div><div style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px; border-right: 4px solid ' + primaryColor + ';"><p style="margin: 0;">• وضوح الأفكار ودقّة المعلومات.</p></div></div><button class="secondary-btn px-6 py-3 rounded-lg text-white font-semibold" onclick="showDistinguishAnswer()">📖 عرض الإجابة النموذجية</button><div id="distinguish-answer" class="mt-4"></div></div><div><h3 class="font-bold mb-4" style="font-size: 1.2rem;">7️⃣ هل تحب قراءة هذا النوع من النصوص العلمية؟ لماذا؟</h3><p style="padding: 1rem; background-color: rgba(0,0,0,0.03); border-radius: 8px;">هذا سؤال رأي شخصي - يمكن للطالب التعبير عن رأيه الخاص وتبرير موقفه. 💭</p></div></div>';
+      }
+      else if (index === 5) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">🦖</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">أنواع الديناصورات في عُمان</h2></div><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;"><div style="padding: 1.5rem; border-radius: 12px; border: 2px solid #2d5a3f; background-color: rgba(45, 90, 63, 0.1);"><div style="font-size: 3.5rem; text-align: center; margin-bottom: 1rem;">🦕</div><h3 class="font-bold mb-2" style="font-size: 1.2rem; color: #2d5a3f; margin: 0;">أورنيثوبود</h3><p class="font-semibold mb-2" style="margin: 0;">أقدام الطير</p><ul style="padding-right: 1rem; margin: 0;"><li>آكل النباتات الصغيرة</li><li>أقدام ثلاثية الأصابع</li><li>الطول: 15 متر</li><li>الوزن: 20 طن</li></ul></div><div style="padding: 1.5rem; border-radius: 12px; border: 2px solid #6b8e23; background-color: rgba(107, 142, 35, 0.1);"><div style="font-size: 3.5rem; text-align: center; margin-bottom: 1rem;">🦖</div><h3 class="font-bold mb-2" style="font-size: 1.2rem; color: #6b8e23; margin: 0;">ثيروبود</h3><p class="font-semibold mb-2" style="margin: 0;">أقدام الوحش</p><ul style="padding-right: 1rem; margin: 0;"><li>ديناصور مفترس</li><li>أشهر آكلات اللحوم</li><li>المفترس الأكبر على اليابسة</li></ul></div><div style="padding: 1.5rem; border-radius: 12px; border: 2px solid #2d5a3f; background-color: rgba(45, 90, 63, 0.1);"><div style="font-size: 3.5rem; text-align: center; margin-bottom: 1rem;">🦕</div><h3 class="font-bold mb-2" style="font-size: 1.2rem; color: #2d5a3f; margin: 0;">ساوروبود</h3><p class="font-semibold mb-2" style="margin: 0;">أقدام السحالي</p><ul style="padding-right: 1rem; margin: 0;"><li>أضخم الكائنات على اليابسة</li><li>يأكل الأعشاب والنباتات</li><li>الطول: 30+ متر</li><li>الارتفاع: 18 متر</li></ul></div><div style="padding: 1.5rem; border-radius: 12px; border: 2px solid #6b8e23; background-color: rgba(107, 142, 35, 0.1);"><div style="font-size: 3.5rem; text-align: center; margin-bottom: 1rem;">🦆</div><h3 class="font-bold mb-2" style="font-size: 1.2rem; color: #6b8e23; margin: 0;">هادروسورس</h3><p class="font-semibold mb-2" style="margin: 0;">السحلية القوية</p><ul style="padding-right: 1rem; margin: 0;"><li>له منقار يشبه البطة</li><li>يأكل النباتات</li><li>مكتشف في 1987م</li><li>كان محصورًا في القارات الشمالية</li></ul></div></div></div>';
+      }
+      else if (index === 6) {
+        return '<div class="section-card p-8 fade-in" style="background-color: ' + surfaceColor + ';"><div class="text-center mb-6"><span class="dino-icon">✅</span><h2 class="font-bold mt-4" style="font-size: 1.8rem; margin: 0;">ملخص الدرس</h2></div><div class="space-y-6"><div style="padding: 1.5rem; background-color: rgba(45, 90, 63, 0.1); border-radius: 12px; border-right: 4px solid #2d5a3f;"><h3 class="font-bold mb-3" style="font-size: 1.3rem; color: #2d5a3f; margin: 0;"><span>🌍</span> المواقع الأثرية</h3><ul style="padding-right: 1rem; margin: 0;"><li>قرية الحوض - ولاية السيب</li><li>السيح الأحمر - ولاية بدبد</li><li>أفضل مواقع عظام الديناصورات في شبه الجزيرة العربية</li></ul></div><div style="padding: 1.5rem; background-color: rgba(107, 142, 35, 0.1); border-radius: 12px; border-right: 4px solid #6b8e23;"><h3 class="font-bold mb-3" style="font-size: 1.3rem; color: #6b8e23; margin: 0;"><span>🔬</span> الأنواع المكتشفة</h3><ul style="padding-right: 1rem; margin: 0;"><li>أورنيثوبود (أقدام الطير) - آكل نباتات</li><li>ثيروبود (أقدام الوحش) - مفترس</li><li>ساوروبود (أقدام السحالي) - عملاق آكل نباتات</li><li>هادروسورس (السحلية القوية) - منقار البطة</li></ul></div><div style="padding: 1.5rem; background-color: rgba(45, 90, 63, 0.1); border-radius: 12px; border-right: 4px solid #2d5a3f;"><h3 class="font-bold mb-3" style="font-size: 1.3rem; color: #2d5a3f; margin: 0;"><span>💡</span> حقائق مهمة</h3><ul style="padding-right: 1rem; margin: 0;"><li>عاشت الديناصورات في مناخ أكثر رطوبة</li><li>كانت المنطقة مليئة بالأنهار والأشجار</li><li>حُفظت العظام بسبب نقص الأكسجين في الرواسب</li><li>لم يُعثر على هيكل متكامل حتى اليوم</li></ul></div><div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #2d5a3f, #6b8e23); color: white; border-radius: 12px;"><p style="font-size: 2.5rem; margin: 0 0 1rem 0;">🎉</p><p class="font-bold" style="font-size: 1.3rem; margin: 0; letter-spacing: 1px;">أحسنت! أكملت الدرس</p><p style="font-size: 0.95rem; margin: 0.5rem 0 0 0; opacity: 0.95;">استمر في التعلم والاستكشاف</p></div></div></div>';
+      }
+      
+      return '';
     }
 
     function attachEventListeners() {
@@ -888,252 +406,89 @@
       const nextBtn = document.getElementById('next-btn');
 
       if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
+        prevBtn.addEventListener('click', function() {
           if (currentSection > 0) {
             currentSection--;
+            closeVocabTooltip();
             renderApp();
+            window.scrollTo(0, 0);
           }
         });
       }
 
       if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
+        nextBtn.addEventListener('click', function() {
           if (currentSection < totalSections - 1) {
             currentSection++;
+            closeVocabTooltip();
             renderApp();
+            window.scrollTo(0, 0);
           }
         });
       }
     }
 
-    // Answer functions
+    // دوال الإجابات
     function showVocab1Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('vocab1-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <div style="font-size: ${baseFont}px; color: ${textColor}; margin-top: 1rem;">
-              <p style="margin: 0.5rem 0;"><strong>• أبرز ←</strong> أهم / أوضح / أظهر</p>
-              <p style="margin: 0.5rem 0;"><strong>• حقبة ←</strong> فترة / عصر / زمن</p>
-              <p style="margin: 0.5rem 0;"><strong>• التباين ←</strong> الاختلاف / التنوع / الفرق</p>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><div style="margin-top: 1rem;"><p style="margin: 0.5rem 0;"><strong>• أبرز ←</strong> أهم / أوضح / أظهر</p><p style="margin: 0.5rem 0;"><strong>• حقبة ←</strong> فترة / عصر / زمن</p><p style="margin: 0.5rem 0;"><strong>• التباين ←</strong> الاختلاف / التنوع / الفرق</p></div></div>';
       }
     }
 
     function showVocab2Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('vocab2-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <div style="font-size: ${baseFont}px; color: ${textColor}; margin-top: 1rem;">
-              <p style="margin: 0.5rem 0;"><strong>أ.</strong> مصابّ (الأنهار)</p>
-              <p style="margin: 0.5rem 0;"><strong>ب.</strong> المناخ</p>
-              <p style="margin: 0.5rem 0;"><strong>ج.</strong> الرواسب</p>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><div style="margin-top: 1rem;"><p style="margin: 0.5rem 0;"><strong>أ.</strong> مصابّ (الأنهار)</p><p style="margin: 0.5rem 0;"><strong>ب.</strong> المناخ</p><p style="margin: 0.5rem 0;"><strong>ج.</strong> الرواسب</p></div></div>';
       }
     }
 
     function showVocab3Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('vocab3-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ أمثلة للإجابة:</p>
-            <div style="font-size: ${baseFont}px; color: ${textColor}; margin-top: 1rem;">
-              <p style="margin: 0.5rem 0;">• تُعَدُّ <strong>سلطنة عُمان</strong> من أبرز <strong>الدول العربية في التطور</strong>.</p>
-              <p style="margin: 0.5rem 0;">• تُعَدُّ <strong>قلعة نزوى</strong> من أبرز <strong>المعالم التاريخية في عُمان</strong>.</p>
-              <p style="margin: 0.5rem 0;">• تُعَدُّ <strong>الجبال</strong> من أبرز <strong>التضاريس في عُمان</strong>.</p>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ أمثلة للإجابة:</p><div style="margin-top: 1rem;"><p style="margin: 0.5rem 0;">• تُعَدُّ <strong>سلطنة عُمان</strong> من أبرز <strong>الدول العربية في التطور</strong>.</p><p style="margin: 0.5rem 0;">• تُعَدُّ <strong>قلعة نزوى</strong> من أبرز <strong>المعالم التاريخية في عُمان</strong>.</p><p style="margin: 0.5rem 0;">• تُعَدُّ <strong>الجبال</strong> من أبرز <strong>التضاريس في عُمان</strong>.</p></div></div>';
       }
     }
 
     function showDiscussion1Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('discussion1-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <p style="font-size: ${baseFont}px; color: ${textColor}; line-height: 1.8;">الديناصورات التي عاشت في عُمان وأنواعها المختلفة.</p>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><p style="line-height: 1.8;">الديناصورات التي عاشت في عُمان وأنواعها المختلفة.</p></div>';
       }
     }
 
     function showDiscussion2Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('discussion2-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <p style="font-size: ${baseFont}px; color: ${textColor}; line-height: 1.8; margin: 1rem 0;">لأن الأنهار كانت تحمل العظام والأخشاب المتحجرة وتُعيد ترسيبها في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر.</p>
-            <div style="padding: 1rem; background-color: rgba(255,255,255,0.5); border-radius: 8px;">
-              <p class="font-semibold mb-2" style="font-size: ${baseFont * 0.95}px; color: ${primaryColor}; margin: 0;">📖 الشاهد من النص:</p>
-              <p style="font-size: ${baseFont * 0.9}px; color: ${textColor}; font-style: italic; margin: 0.5rem 0;">
-                "وكانت الأنهارُ تحمل هذه العظام والأخشاب المتحجِّرة، وتُعيد ترسيبَها في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر..."
-              </p>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><p style="line-height: 1.8; margin: 1rem 0;">لأن الأنهار كانت تحمل العظام والأخشاب المتحجرة وتُعيد ترسيبها في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر.</p><div style="padding: 1rem; background-color: rgba(255,255,255,0.5); border-radius: 8px;"><p class="font-semibold mb-2" style="font-size: 0.95rem; color: #2d5a3f; margin: 0;">📖 الشاهد من النص:</p><p style="font-size: 0.9rem; font-style: italic; margin: 0.5rem 0;">"وكانت الأنهارُ تحمل هذه العظام والأخشاب المتحجِّرة، وتُعيد ترسيبَها في مصابّ الأنهار ومناطق التقاء الأنهار بالبحر..."</p></div></div>';
       }
     }
 
     function showDiscussion3Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('discussion3-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <p style="font-size: ${baseFont}px; color: ${textColor}; line-height: 1.8;">بسبب نقص الأكسجين في الرواسب التي غُطِّيَت بها العظام والأخشاب، مما حفظها من التحلُّل.</p>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><p style="line-height: 1.8;">بسبب نقص الأكسجين في الرواسب التي غُطِّيَت بها العظام والأخشاب، مما حفظها من التحلُّل.</p></div>';
       }
     }
 
     function showClassificationAnswer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('classification-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4 text-center" style="font-size: ${baseFont * 1.2}px; color: ${primaryColor}; margin: 0;">✅ الجدول الكامل:</p>
-            <div style="overflow-x: auto; margin-top: 1rem;">
-              <table style="width: 100%; border-collapse: collapse; border: 2px solid ${primaryColor};">
-                <thead>
-                  <tr style="background-color: ${primaryColor}; color: white;">
-                    <th style="padding: 1rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.9}px;">الاسم</th>
-                    <th style="padding: 1rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.9}px;">المعنى العربي</th>
-                    <th style="padding: 1rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.9}px;">الصنف</th>
-                    <th style="padding: 1rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.9}px;">الصفات</th>
-                  </tr>
-                </thead>
-                <tbody style="background-color: white;">
-                  <tr>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">أورنيثوبود</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">أقدام الطير</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">آكل نباتات</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">طولها نحو 15م ووزنها نحو 20 طنًا</td>
-                  </tr>
-                  <tr style="background-color: rgba(0,0,0,0.02);">
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">ساوروبود</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">أقدام السحالي</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">آكل نباتات</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">طولها أكثر من 30م وارتفاعها نحو 18م</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">هادروسورس</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">السحلية القوية</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">آكل نباتات</td>
-                    <td style="padding: 0.875rem; border: 1px solid ${primaryColor}; text-align: right; font-size: ${baseFont * 0.85}px; color: ${textColor};">له منقار يشبه البطّة</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4 text-center" style="font-size: 1.2rem; color: #2d5a3f; margin: 0;">✅ الجدول الكامل:</p><div style="overflow-x: auto; margin-top: 1rem;"><table style="width: 100%; border-collapse: collapse; border: 2px solid #2d5a3f;"><thead><tr style="background-color: #2d5a3f; color: white;"><th style="padding: 1rem; border: 1px solid #2d5a3f; text-align: right;">الاسم</th><th style="padding: 1rem; border: 1px solid #2d5a3f; text-align: right;">المعنى العربي</th><th style="padding: 1rem; border: 1px solid #2d5a3f; text-align: right;">الصنف</th><th style="padding: 1rem; border: 1px solid #2d5a3f; text-align: right;">الصفات</th></tr></thead><tbody style="background-color: white;"><tr><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">أورنيثوبود</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">أقدام الطير</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">آكل نباتات</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">طولها نحو 15م ووزنها نحو 20 طنًا</td></tr><tr style="background-color: rgba(0,0,0,0.02);"><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">ساوروبود</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">أقدام السحالي</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">آكل نباتات</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">طولها أكثر من 30م وارتفاعها نحو 18م</td></tr><tr><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">هادروسورس</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">السحلية القوية</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">آكل نباتات</td><td style="padding: 0.875rem; border: 1px solid #2d5a3f; text-align: right;">له منقار يشبه البطّة</td></tr></tbody></table></div></div>';
       }
     }
 
     function showQuestion5Answer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      
       const answerDiv = document.getElementById('question5-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4" style="font-size: ${baseFont * 1.1}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية:</p>
-            <div style="font-size: ${baseFont}px; color: ${textColor};">
-              <div style="margin: 1rem 0;">
-                <p class="font-semibold mb-2" style="margin: 0;">أ. السبب:</p>
-                <p style="margin: 0; line-height: 1.8;">لأن هذا النوع كان وجوده محصورًا في القارات الشمالية (أمريكا الشمالية وأوروبا وآسيا)، ولم يكن معروفًا في شبه الجزيرة العربية أو إفريقيا.</p>
-              </div>
-              <div style="margin: 1rem 0;">
-                <p class="font-semibold mb-2" style="margin: 0;">ب. السبب العلمي المحتمل:</p>
-                <ul style="padding-right: 1.5rem; margin: 0;">
-                  <li>هجرة الديناصورات من القارات الشمالية إلى الجنوب</li>
-                  <li>وجود جسور برية قديمة ربطت القارات</li>
-                  <li>تغيرات مناخية دفعتها للانتقال جنوبًا</li>
-                  <li>اتصال اليابسة في العصور القديمة</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4" style="font-size: 1.1rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية:</p><div><div style="margin: 1rem 0;"><p class="font-semibold mb-2" style="margin: 0;">أ. السبب:</p><p style="margin: 0; line-height: 1.8;">لأن هذا النوع كان وجوده محصورًا في القارات الشمالية (أمريكا الشمالية وأوروبا وآسيا)، ولم يكن معروفًا في شبه الجزيرة العربية أو إفريقيا.</p></div><div style="margin: 1rem 0;"><p class="font-semibold mb-2" style="margin: 0;">ب. السبب العلمي المحتمل:</p><ul style="padding-right: 1.5rem; margin: 0;"><li>هجرة الديناصورات من القارات الشمالية إلى الجنوب</li><li>وجود جسور برية قديمة ربطت القارات</li><li>تغيرات مناخية دفعتها للانتقال جنوبًا</li><li>اتصال اليابسة في العصور القديمة</li></ul></div></div></div>';
       }
     }
 
     function showDistinguishAnswer() {
-      const config = window.elementSdk?.config || defaultConfig;
-      const baseFont = config.font_size || defaultConfig.font_size;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const successColor = '#22c55e';
-      const dangerColor = '#ef4444';
-      
       const answerDiv = document.getElementById('distinguish-answer');
       if (answerDiv) {
-        answerDiv.innerHTML = `
-          <div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid ${primaryColor}; border-radius: 12px; padding: 1.5rem;">
-            <p class="font-bold mb-4 text-center" style="font-size: ${baseFont * 1.2}px; color: ${primaryColor}; margin: 0;">✅ الإجابة النموذجية</p>
-            <div style="margin: 1.5rem 0; font-size: ${baseFont}px;">
-              <p style="margin: 0.5rem 0;"><span style="color: ${successColor}; font-size: ${baseFont * 1.2}px; font-weight: bold;">✔</span> استخدام الأرقام والكلمات العلمية.</p>
-              <p style="margin: 0.5rem 0;"><span style="color: ${dangerColor}; font-size: ${baseFont * 1.2}px; font-weight: bold;">✘</span> وجود حوار بين الشخصيات.</p>
-              <p style="margin: 0.5rem 0;"><span style="color: ${successColor}; font-size: ${baseFont * 1.2}px; font-weight: bold;">✔</span> استخدام الرسوم والصور أحيانًا لتوضيح النص.</p>
-              <p style="margin: 0.5rem 0;"><span style="color: ${dangerColor}; font-size: ${baseFont * 1.2}px; font-weight: bold;">✘</span> سرد حكايات خيالية عن الديناصورات.</p>
-              <p style="margin: 0.5rem 0;"><span style="color: ${successColor}; font-size: ${baseFont * 1.2}px; font-weight: bold;">✔</span> وضوح الأفكار ودقّة المعلومات.</p>
-            </div>
-            <div style="padding: 1rem; background-color: rgba(255,255,255,0.5); border-radius: 8px; margin-top: 1rem;">
-              <p class="font-semibold mb-2" style="font-size: ${baseFont * 1.05}px; color: ${primaryColor}; margin: 0;">📖 التفسير:</p>
-              <p style="font-size: ${baseFont * 0.95}px; line-height: 1.8; color: ${textColor}; margin: 0.5rem 0;">
-                النصوص العلمية تتميز بالدقة والموضوعية، وتستخدم الأرقام والمصطلحات العلمية، وقد تستعين بالرسوم التوضيحية. أما الحوار والحكايات الخيالية فهي من خصائص النصوص الأدبية والقصصية.
-              </p>
-            </div>
-          </div>
-        `;
+        answerDiv.innerHTML = '<div class="answer-box" style="background-color: rgba(45, 90, 63, 0.1); border: 2px solid #2d5a3f; border-radius: 12px; padding: 1.5rem;"><p class="font-bold mb-4 text-center" style="font-size: 1.2rem; color: #2d5a3f; margin: 0;">✅ الإجابة النموذجية</p><div style="margin: 1.5rem 0;"><p style="margin: 0.5rem 0;"><span style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">✔</span> استخدام الأرقام والكلمات العلمية.</p><p style="margin: 0.5rem 0;"><span style="color: #ef4444; font-size: 1.2rem; font-weight: bold;">✘</span> وجود حوار بين الشخصيات.</p><p style="margin: 0.5rem 0;"><span style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">✔</span> استخدام الرسوم والصور أحيانًا لتوضيح النص.</p><p style="margin: 0.5rem 0;"><span style="color: #ef4444; font-size: 1.2rem; font-weight: bold;">✘</span> سرد حكايات خيالية عن الديناصورات.</p><p style="margin: 0.5rem 0;"><span style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">✔</span> وضوح الأفكار ودقّة المعلومات.</p></div><div style="padding: 1rem; background-color: rgba(255,255,255,0.5); border-radius: 8px; margin-top: 1rem;"><p class="font-semibold mb-2" style="font-size: 1.05rem; color: #2d5a3f; margin: 0;">📖 التفسير:</p><p style="font-size: 0.95rem; line-height: 1.8; margin: 0.5rem 0;">النصوص العلمية تتميز بالدقة والموضوعية، وتستخدم الأرقام والمصطلحات العلمية، وقد تستعين بالرسوم التوضيحية. أما الحوار والحكايات الخيالية فهي من خصائص النصوص الأدبية والقصصية.</p></div></div>';
       }
     }
 
@@ -1147,78 +502,7 @@
     window.showQuestion5Answer = showQuestion5Answer;
     window.showDistinguishAnswer = showDistinguishAnswer;
 
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (config) => ({
-          recolorables: [
-            {
-              get: () => config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => config.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                config.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => config.primary_action_color || defaultConfig.primary_action_color,
-              set: (value) => {
-                config.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            },
-            {
-              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-              set: (value) => {
-                config.secondary_action_color = value;
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
-            }
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
-            }
-          },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
-            }
-          }
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ["lesson_title", config.lesson_title || defaultConfig.lesson_title],
-          ["lesson_subtitle", config.lesson_subtitle || defaultConfig.lesson_subtitle],
-          ["author_name", config.author_name || defaultConfig.author_name],
-          ["teacher_name", config.teacher_name || defaultConfig.teacher_name],
-          ["school_name", config.school_name || defaultConfig.school_name],
-          ["ministry", config.ministry || defaultConfig.ministry],
-          ["next_button_text", config.next_button_text || defaultConfig.next_button_text],
-          ["previous_button_text", config.previous_button_text || defaultConfig.previous_button_text]
-        ])
-      });
-    }
-
     renderApp();
   </script>
- </body>
+</body>
 </html>
